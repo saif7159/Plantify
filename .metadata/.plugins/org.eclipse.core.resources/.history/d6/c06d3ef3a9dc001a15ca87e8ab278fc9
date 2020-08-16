@@ -1,0 +1,10 @@
+package com.plantify.user.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.plantify.user.model.Login;
+
+public interface UserDetailsDao extends JpaRepository<Login, Integer>{
+	
+
+}

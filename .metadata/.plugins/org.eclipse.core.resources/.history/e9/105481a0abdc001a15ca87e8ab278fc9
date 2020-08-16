@@ -1,0 +1,5 @@
+package com.plantify.user.controller;
+
+public class UserController {
+
+}

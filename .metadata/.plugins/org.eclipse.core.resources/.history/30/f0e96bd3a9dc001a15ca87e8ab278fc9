@@ -1,0 +1,5 @@
+package com.plantify.user.dao;
+
+public interface UserDetailsDao {
+
+}

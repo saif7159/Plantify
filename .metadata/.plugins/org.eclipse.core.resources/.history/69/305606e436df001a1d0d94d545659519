@@ -1,0 +1,11 @@
+package com.plantify.user.service;
+
+import java.util.Optional;
+
+import com.plantify.user.model.Login;
+import com.plantify.user.model.UserDetails;
+
+public interface UserService {
+public void createUser(UserDetails user);
+public Optional<UserDetails> getUser(int id);
+}

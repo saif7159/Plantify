@@ -1,0 +1,19 @@
+package com.plantify.user.service;
+
+import com.plantify.user.model.Login;
+
+public class UserServiceImpl implements UserService {
+
+	@Override
+	public void createUser(Login login) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Login getUser(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

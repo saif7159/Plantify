@@ -1,0 +1,30 @@
+package com.plantify.user.security;
+
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.plantify.user.model.Login;
+import com.plantify.user.service.UserService;
+@Service
+public class UserDetailService implements UserDetailsService {
+	@Autowired
+	private UserService service;
+	@Override
+	//Im treating the email as username itself here.
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Login login = service.findByEmail(username);
+		List<GrantedAuthority> grantedAuths = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_"+login.getRole());
+		return new User(login.getEmail(),login.getPassword(),grantedAuths);
+	}
+
+	
+}

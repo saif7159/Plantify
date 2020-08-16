@@ -1,0 +1,6 @@
+package com.plantify.user.model;
+
+public class UserCredential {
+private String username;
+private String password;
+}
