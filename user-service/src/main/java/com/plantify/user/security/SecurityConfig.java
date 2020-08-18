@@ -20,8 +20,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers("/auth/**").permitAll().anyRequest()
 				.authenticated().and()
 				.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
-				// this disables session creation on Spring Security
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 	}
 
 	// Spring has UserDetailsService interface, which can be overriden to provide

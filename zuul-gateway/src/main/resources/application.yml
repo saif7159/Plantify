@@ -9,4 +9,10 @@ zuul:  ignored-patterns: '*'
   routes:    user-service:
      path: /user/**
      service-id: user-service
-     sensitive-headers: Cookie,Set-Cookie         
+     sensitive-headers: Cookie,Set-Cookie    
+    catalogue-service:
+     path: /catalogue/**
+     service-id: catalogue-service
+    cart-service:  
+     path: /cart/**
+     service-id: cart-service      

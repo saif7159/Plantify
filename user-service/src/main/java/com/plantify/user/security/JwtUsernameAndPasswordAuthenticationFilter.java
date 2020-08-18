@@ -68,7 +68,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 						auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
 				.setIssuedAt(new Date(now)).setExpiration(new Date(now + SecurityConstants.EXPIRATION_TIME)) // in
 																												// milliseconds
-				.signWith(SignatureAlgorithm.HS512, SecurityConstants.SECRET.getBytes()).compact();
+				.signWith(SignatureAlgorithm.HS512, "secret").compact();
 		System.out.println("Im the token" + token);
 		// Add token to header
 		response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);

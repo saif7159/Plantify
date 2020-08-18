@@ -7,13 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.plantify.user.dao.UserDetailsDao;
 import com.plantify.user.model.Login;
+
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDetailsDao userdao;
+
 	@Override
-	public void createUser(Login login) {
-		userdao.save(login);
+	public Login createUser(Login login) {
+		return userdao.save(login);
 
 	}
 

@@ -21,9 +21,9 @@ public class UserController {
 	private BCryptPasswordEncoder encoder;
 
 	@PostMapping("/create-user")
-	public void createUser(@RequestBody Login login) {
+	public Login createUser(@RequestBody Login login) {
 		login.setPassword(encoder.encode(login.getPassword()));
-		userService.createUser(login);
+		return userService.createUser(login);
 	}
 
 	@GetMapping("/getUser/id/{id}")
