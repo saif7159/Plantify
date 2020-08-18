@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.plantify.cart.model.Catalogue;
 
-@FeignClient(name = "catalogue-service")
+@FeignClient(name = "catalogue-service" , fallback = CatalogueClientFallback.class)
 public interface CatalogueClient {
 	@GetMapping("/entity/id/{id}")
 	public Catalogue getEntityById(@PathVariable int id);

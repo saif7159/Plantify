@@ -15,6 +15,7 @@ import lombok.ToString;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Catalogue {
+	private int id;
 	private String name;
 	private String category;
 	private int price;

@@ -1,6 +1,7 @@
 package com.plantify.cart.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -16,6 +17,7 @@ import com.plantify.cart.model.Cart;
 import com.plantify.cart.model.Catalogue;
 import com.plantify.cart.model.Login;
 import com.plantify.cart.service.CartService;
+import com.plantify.exception.CartItemNotFoundException;
 
 @RestController
 public class CartController {
@@ -46,11 +48,17 @@ public class CartController {
 
 	@GetMapping("/get-all")
 	public List<Cart> getAllEntities() {
-		return service.getAll();
+		List<Cart> cart = service.getAll();
+		if (cart.isEmpty())
+			throw new CartItemNotFoundException("Cart is Empty");
+		return cart;
 	}
 
 	@GetMapping("/get-cart/id/{id}")
 	public Cart getCartEntity(@PathVariable int id) {
+		Optional<Cart> cart = service.getById(id);
+		if (cart.isEmpty())
+			throw new CartItemNotFoundException("Item with " + id + " not found");
 		return service.getById(id).get();
 	}
 
@@ -61,6 +69,9 @@ public class CartController {
 
 	@DeleteMapping("/remove-cart/id/{id}")
 	public void removeCart(@PathVariable int id) {
+		Optional<Cart> cart = service.getById(id);
+		if (cart.isEmpty())
+			throw new CartItemNotFoundException("Item with " + id + " not found");
 		service.deleteCart(id);
 	}
 }

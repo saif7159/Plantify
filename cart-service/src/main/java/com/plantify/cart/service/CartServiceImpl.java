@@ -14,6 +14,8 @@ import com.plantify.cart.dao.CartDao;
 import com.plantify.cart.model.Cart;
 import com.plantify.cart.model.Catalogue;
 import com.plantify.cart.model.Login;
+import com.plantify.exception.CartItemNotFoundException;
+import com.plantify.exception.ServiceDownException;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -45,6 +47,7 @@ public class CartServiceImpl implements CartService {
 	public CompletableFuture<Login> getUser(String name) {
 		System.out.println("Thread name for user:" + Thread.currentThread().getName());
 		Login login = userclient.getUserByEmail(name);
+		if(login.getId()==0) throw new ServiceDownException("User Service is Down");
 		return CompletableFuture.completedFuture(login);
 	}
 
@@ -53,6 +56,7 @@ public class CartServiceImpl implements CartService {
 	public CompletableFuture<Catalogue> getEntity(int id) {
 		System.out.println("Thread name for entity:" + Thread.currentThread().getName());
 		Catalogue catalogue = catalogueclient.getEntityById(id);
+		if(catalogue.getId()==0) throw new ServiceDownException("Catalogue Service is Down");
 		System.out.println(catalogue.toString());
 		return CompletableFuture.completedFuture(catalogue);
 	}
