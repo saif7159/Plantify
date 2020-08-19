@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="hi"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="Yes i caught"/>
 			<item value="hi"/>
 			<item value="token"/>
 			<item value="username"/>

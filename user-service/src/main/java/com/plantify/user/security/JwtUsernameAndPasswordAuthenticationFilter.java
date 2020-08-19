@@ -10,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,6 +28,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	AuthenticationManager authenticationManager;
 
+	private static final Logger log = LoggerFactory.getLogger(JwtUsernameAndPasswordAuthenticationFilter.class);
+
 	public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
 	}
@@ -36,15 +40,12 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
 		try {
 
-			// 1. Get credentials from request
 			UserCredential login = new ObjectMapper().readValue(request.getInputStream(), UserCredential.class);
 
-			// 2. Create auth object (contains credentials) which will be used by auth
-			// manager
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(login.getUsername(),
 					login.getPassword(), Collections.emptyList());
 
-			// 3. Authentication manager authenticate the user, and use
+			// Authentication manager authenticate the user, and use
 			// UserDetialsServiceImpl::loadUserByUsername() method to load the user.
 			return authenticationManager.authenticate(authToken);
 
@@ -53,31 +54,26 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 		}
 	}
 
-	// Upon successful authentication, generate a token.
-	// The 'auth' passed to successfulAuthentication() is the current authenticated
-	// user.
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
-		System.out.println("Im Successful");
+		log.info("User Authenticated Successfully");
 		Long now = System.currentTimeMillis();
+		log.info("Granted Authorities: "
+				+ auth.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.toList()).toString());
 		String token = Jwts.builder().setSubject(auth.getName())
-				// Convert to list of strings.
-				// This is important because it affects the way we get them back in the Gateway.
 				.claim("authorities",
 						auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-				.setIssuedAt(new Date(now)).setExpiration(new Date(now + SecurityConstants.EXPIRATION_TIME)) // in
-																												// milliseconds
+				.setIssuedAt(new Date(now)).setExpiration(new Date(now + SecurityConstants.EXPIRATION_TIME)) // milliseconds
 				.signWith(SignatureAlgorithm.HS512, "secret").compact();
-		System.out.println("Im the token" + token);
-		// Add token to header
+		log.info("Generated Token" + token);
+		// Adding token to header
 		response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
 	}
 
 	@Override
 	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException failed) throws IOException, ServletException {
-		// Add more descriptive message
 		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed");
 	}
 

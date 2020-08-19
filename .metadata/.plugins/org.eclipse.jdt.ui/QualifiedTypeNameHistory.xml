@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
-    <fullyQualifiedTypeName name="com.plantify.catalogue.model.Catalogue"/>
-    <fullyQualifiedTypeName name="org.springframework.http.HttpMethod"/>
     <fullyQualifiedTypeName name="javax.persistence.Entity"/>
     <fullyQualifiedTypeName name="javax.persistence.Id"/>
     <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
@@ -39,7 +36,6 @@
     <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
     <fullyQualifiedTypeName name="lombok.Getter"/>
     <fullyQualifiedTypeName name="lombok.Setter"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ControllerAdvice"/>
     <fullyQualifiedTypeName name="org.springframework.cloud.netflix.hystrix.EnableHystrix"/>
     <fullyQualifiedTypeName name="com.plantify.cart.client.CatalogueClientFallback"/>
     <fullyQualifiedTypeName name="com.plantify.cart.client.UserClientFallback"/>
@@ -49,15 +45,19 @@
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
     <fullyQualifiedTypeName name="com.plantify.cart.client.CatalogueClient"/>
     <fullyQualifiedTypeName name="com.plantify.cart.model.Catalogue"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
-    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
-    <fullyQualifiedTypeName name="com.plantify.cart.model.ExceptionMessage"/>
     <fullyQualifiedTypeName name="com.sun.jersey.spi.inject.Errors.ErrorMessage"/>
     <fullyQualifiedTypeName name="org.apache.http.HttpStatus"/>
-    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="com.plantify.exception.ServiceDownException"/>
     <fullyQualifiedTypeName name="com.plantify.exception.CartExceptionController"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="com.plantify.exception.CartItemNotFoundException"/>
     <fullyQualifiedTypeName name="org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JacksonInject.Value"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
+    <fullyQualifiedTypeName name="com.plantify.exception.CartItemNotFoundException"/>
+    <fullyQualifiedTypeName name="com.plantify.cart.exception.CartItemNotFoundException"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="com.plantify.cart.model.ExceptionMessage"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="com.plantify.cart.exception.ServiceDownException"/>
 </qualifiedTypeNameHistroy>

@@ -1,4 +1,4 @@
-package com.plantify.exception;
+package com.plantify.cart.exception;
 
 public class CartItemNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

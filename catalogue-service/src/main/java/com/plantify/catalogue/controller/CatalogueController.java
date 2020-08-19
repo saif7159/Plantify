@@ -1,6 +1,7 @@
 package com.plantify.catalogue.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.plantify.catalogue.exception.ItemNotFoundException;
 import com.plantify.catalogue.model.Catalogue;
 import com.plantify.catalogue.service.CatalogueService;
 
@@ -26,7 +28,10 @@ public class CatalogueController {
 
 	@GetMapping("/entity/id/{id}")
 	public Catalogue getEntityById(@PathVariable int id) {
-		return service.getById(id).get();
+		Optional<Catalogue> catalogue = service.getById(id);
+		if (catalogue.isEmpty())
+			throw new ItemNotFoundException("No item with id: " + id);
+		return catalogue.get();
 	}
 
 	@GetMapping("/entity/name/{name}")
@@ -48,6 +53,9 @@ public class CatalogueController {
 
 	@DeleteMapping("/delete-entity/id/{id}")
 	public void deleteEntity(@PathVariable int id) {
+		Optional<Catalogue> catalogue = service.getById(id);
+		if (catalogue.isEmpty())
+			throw new ItemNotFoundException("No item with id: " + id);
 		service.deleteCatalogue(id);
 	}
 }

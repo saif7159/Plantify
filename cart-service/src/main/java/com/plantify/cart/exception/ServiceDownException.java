@@ -1,4 +1,4 @@
-package com.plantify.exception;
+package com.plantify.cart.exception;
 
 public class ServiceDownException extends RuntimeException {
 
