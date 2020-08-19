@@ -5,6 +5,7 @@ I have considered a shopping portal for plants, It contains three main services:
                     (Note: The JWT authorization takes place on zuul gateway in order secure the requests from gateway itself).
   2. catalogue-service: Performs the CRUD operation for plants and accessory catalogue.
   3. cart-service: Communicates with user-service and catalogue-service both using feign to get the product and user detail in order to add the item to the cart.
+  
 Other files:
   1. eureka-server: For discovery service.
   2. config-server: Config server for reading application.yml
